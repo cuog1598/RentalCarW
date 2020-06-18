@@ -1,0 +1,218 @@
+﻿@model IEnumerable<CarRenTal.Models.Xe>
+@{
+    ViewData["Title"] = "kết quả tìm kiếm";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+@{
+
+}
+
+<style>
+    .form-check a {
+        color: black;
+    }
+</style>
+<!-- Start model Area -->
+<section class="model-area section-gap" id="cars">
+    <div class="container">
+        <div class="row d-flex justify-content-center pb-40">
+            <div class="col-md-8 pb-40 header-text">
+                <h1 class="text-center pb-10">Choose your Desired Car Model</h1>
+                <p class="text-center">
+                    Who are in extremely love with eco friendly system.
+                </p>
+            </div>
+        </div>
+        <div>
+            <div class="row align-items single-model item">
+
+                <div class="col-lg-2 model-left" style="padding-top:50px">
+                    <h4 class="mt-20">Hãng xe</h4> <br />
+                    <!-- Material unchecked -->
+                    <div>
+                        @{
+                            int sa = 1000;
+                        }
+                        @foreach (var item in ViewBag.TenHang)
+                        {
+                            if (sa != item.MaHangXe)
+                            {
+                                if (CarRenTal.wwwroot.DAO.Seacrch.mahang == item.MaHangXe)
+                                {
+
+
+                                    sa = item.MaHangXe;
+
+                                    <div class="form-check">
+
+                                        <input type="radio" class="form-check-input"  checked>
+                                        <label class="form-check-label">@item.TenHang</label>
+                                    </div>
+                                }
+                                else
+                                {
+                                      sa = item.MaHangXe;
+                                    <div class="form-check">
+
+                                        <input type="radio" class="form-check-input"  >
+                                        <a href="@Url.Action("index","DichVu", new { mahang=item.MaHangXe})">
+                                            <label class="form-check-label">@item.TenHang</label>
+                                        </a>
+                                    </div>
+                                }
+
+                            }
+
+                        }
+
+
+
+
+                    </div>
+                    <h4 class="mt-20">Huyện</h4> <br />
+                    <!-- Material unchecked -->
+                    <div>
+                    </div>
+
+                    @{
+                        int s = 10000;
+                    }
+                    @foreach (var item in ViewBag.tinh)
+                    {
+                        if (s != item.MaHuyen)
+                        {
+                            if (item.MaHuyen == Convert.ToInt32(CarRenTal.wwwroot.DAO.Seacrch.Huyen))
+                            {
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input" name="groupOfMaterialRadios" checked>
+
+
+                                    <label class="form-check-label">@item.MaHuyenNavigation.TenHuyen</label>
+
+
+                                </div>
+                                s = item.MaHuyenNavigation.Id;
+
+                            }
+                            else
+                            {
+                                <div class="form-check">
+
+                                    <input type="radio" class="form-check-input" name="groupOfMaterialRadios">
+                                    <a href="@Url.Action("thaydoihuyen","DichVu", new { id=item.MaHuyen})">
+                                        <label class="form-check-label">@item.MaHuyenNavigation.TenHuyen</label>
+                                    </a>
+                                </div>
+                                s = item.MaHuyenNavigation.Id;
+                            }
+
+                        }
+                        else
+                        {
+
+                        }
+
+                    }
+
+
+                    @*<h4 class="mt-20">Sắp xếp</h4> <br />
+                    <div class="form-check">
+                        <input type="radio" class="form-check-input" id="1" name="groupOfMaterialRadios2" checked>
+                        <label class="form-check-label" for="1">Option 1</label>
+                    </div>
+
+                    <!-- Group of material radios - option 2 -->
+                    <div class="form-check">
+                        <input type="radio" class="form-check-input" id="2" name="groupOfMaterialRadios2">
+                        <label class="form-check-label" for="2">option 2</label>
+                    </div>
+
+                    <!-- Group of material radios - option 3 -->
+                    <div class="form-check">
+                        <input type="radio" class="form-check-input" id="m3" name="groupOfMaterialRadios2">
+                        <label class="form-check-label" for="m3">option 3</label>
+                    </div>*@
+                </div>
+
+                <div class="col-lg-10 model-right">
+
+                    @foreach (var item in Model)
+                    {
+                        <div class="" style="border-bottom: 1px solid black; padding-top:30px">
+                            <div class="row align-items-center single-model item">
+
+                                <div class="col-lg-4 model-left">
+                                    <a href="/DichVu/Detail/@item.Id)">
+                                        <img id="img-Sanpham" class="img-fluid" src="@item.Hinh" alt="" style="min-width:100%" />
+                                    </a>
+                                </div>
+                                <div class="col-lg-8 model-right">
+                                    <div class="title justify-content-between d-flex">
+                                        <a href="@Url.Action("Detail","DichVu",new { id=item.Id})">
+                                            <h4 class="mt-20">@item.Tenxe</h4>
+                                        </a>
+                                        <h2>@item.Gia VNĐ<span>/day</span></h2>
+                                    </div>
+                                    <p>
+                                        @item.Mota
+                                    </p>
+                                    <p>
+                                        hãng xe          : @item.TenHang <br>
+                                        Ngày đăng        : @item.NgayNhap <br>
+                                        Người đăng       : @item.TenNguoiDang <br>
+                                        Giá thuê         : @item.Gia <br>
+                                    </p>
+                                    @if (CarRenTal.DAO.Common.CommonConstants.UserName == null)
+                                    {
+
+                                        <a type="button" class="btn btn-secondary" data-toggle="modal" data-target="#staticModal" href="#">Save this car</a>
+                                        <a class="btn btn-warning" data-toggle="modal" data-target="#staticModal" href="#">Book This Car Now </a>
+                                        //mediumModal
+                                        <div class="modal fade" id="staticModal" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="mediumModalLabel">Thông báo từ hệ thống</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>
+                                                            Bạn phải đăng nhập để thực hiện thao tác này !
+                                                        </p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                        <a href="@Url.Action("index","UserLogin")" type="button" class="btn btn-primary">Đi đến trang đăng nhập</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <a class="btn btn-secondary" href="@Url.Action("saveCart", "DichVu", new { id = item.Id })">Save this car</a>
+                                        <a class="btn btn-warning" href="@Url.Action("Create","Book",new {id=item.Id})">Book This Car Now </a>
+
+                                    }
+
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                    }
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+

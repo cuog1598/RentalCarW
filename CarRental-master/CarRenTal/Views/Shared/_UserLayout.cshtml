@@ -1,0 +1,187 @@
+﻿
+
+<!DOCTYPE html>
+<html lang="zxx" class="no-js">
+<head>
+    <!-- Mobile Specific Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="img/fav.png">
+    <!-- Author Meta -->
+    <meta name="author" content="codepixer">
+    <!-- Meta Description -->
+    <meta name="description" content="">
+    <!-- Meta Keyword -->
+    <meta name="keywords" content="">
+    <!-- meta character set -->
+    <meta charset="UTF-8">
+    <!-- Site Title -->
+    <title>@ViewData["Title"]</title>
+
+
+        <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
+        <!--
+        CSS
+
+        ============================================= -->
+        <link rel="stylesheet" href="/css/linearicons.css">
+        <link href="~/css/font-awesome.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="/css/magnific-popup.css">
+        <link rel="stylesheet" href="/css/nice-select.css">
+        <link rel="stylesheet" href="/css/animate.min.css">
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <link rel="stylesheet" href="https://cdn.syncfusion.com/ej2/material.css" />
+
+        <link href="~/css/owl.carousel.css" rel="stylesheet" />
+        <link href="~/css/main.css" rel="stylesheet" />
+        <link href="~/css/bootstrap.css" rel="stylesheet" />
+        <script src="https://cdn.syncfusion.com/ej2/dist/ej2.min.js"></script>
+
+        @RenderSection("Top", required: false)
+    </head>
+<body style="background-color:#eff0f4">
+
+    <header style=" background-color:black" id="header" id="home">
+        <div class="container">
+            <div class="row align-items-center justify-content-between d-flex">
+                <div id="logo">
+                    <a href="/Home"><img src="/img/logo.png" alt="" title="" /></a>
+                </div>
+                <nav id="nav-menu-container">
+                    <ul class="nav-menu">
+                        <li class="menu-active"><a href="@Url.Action("Index","Home")">Home</a></li>
+                        <li><a href="@Url.Action("Index","Home")">About</a></li>
+                        <li><a href="./?id=3">Blog</a></li>
+
+                        <li><a href="@Url.Action("index","HomThuLienHes")">Contact</a></li>
+
+
+                        @if (CarRenTal.DAO.Common.CommonConstants.UserName == null)
+                        {
+
+                            <li><a href="@Url.Action("index","UserLogin")">Đăng nhập</a></li>
+
+                        }
+                        else
+                        {
+                    <li>
+                        <a href="#">@CarRenTal.DAO.Common.CommonConstants.UserName</a>
+                        <ul class="sub-menu-m" style="font-size:16px">
+                            <li class="ti-face-smile"><a href="~/User/Profile/Details?id=@CarRenTal.DAO.Common.CommonConstants.UserID">Quản lý tài khoản</a></li>
+                            <li><a href="/User/Customer/oders?id=@CarRenTal.DAO.Common.CommonConstants.UserID">Đơn hàng của tôi</a></li>
+                            <li><a href="@Url.Action("Index","Carts", new { id = CarRenTal.DAO.Common.CommonConstants.UserID })">Xe đã lưu</a></li>
+                            <li>@Html.ActionLink("Thoát", "Logout", "UserLogin")</li>
+                        </ul>
+
+                        <span class="arrow-main-menu-m">
+                            <i class="fa fa-angle-right" aria-hidden="true"></i>
+                        </span>
+                    </li>
+                            
+                        }
+                    </ul>
+                </nav><!-- #nav-menu-container -->
+            </div>
+        </div>
+    </header><!-- #header -->
+    <!-- start banner Area -->
+    @RenderSection("Scripts", required: false)
+
+    @RenderBody()
+
+    <!-- End footer Area -->
+    <footer class="footer-area section-gap" >
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2 col-md-6 col-sm-6">
+                    <div class="single-footer-widget">
+                        <h6>about</h6>
+                        <ul>
+                            <li><a href="/">Trang chủ</a></li>
+                            <li><a href="#">Thông tin</a></li>
+                            <li><a href="#">Chứng chỉ</a></li>
+                            <li><a href="#">Blog</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-6">
+                    <div class="single-footer-widget">
+                        <h6>contact</h6>
+                        <ul>
+                            <li><a href="#">Liên hệ</a></li>
+                           
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-6">
+                    <div class="single-footer-widget">
+                        <h6>ifomation</h6>
+                        <ul>
+                            <li><a href="#">About us</a></li>
+                         
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-6 social-widget">
+                    <div class="single-footer-widget">
+                        <h6>Follow Us</h6>
+                        <p>Let us be social</p>
+                        <div class="footer-social d-flex align-items-center">
+                            <a href="https://www.facebook.com/profile.php?id=100004304823807"><i class="fa fa-facebook"></i></a>
+                            <a href="https://twitter.com/?lang=vi"><i class="fa fa-twitter"></i></a>
+                            <a href="https://www.instagram.com/"><i class="fa fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4  col-md-6 col-sm-6">
+                    <div class="single-footer-widget">
+                        <h6>Newsletter</h6>
+                        <p>Stay update with our latest</p>
+                        <div class="" id="mc_embed_signup">
+                            <form target="_blank" novalidate="true" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01" method="get" class="form-inline">
+                                <input class="form-control" name="EMAIL" placeholder="Enter Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Email '" required="" type="email">
+                                <button class="click-btn btn btn-default"><span class="lnr lnr-arrow-right"></span></button>
+                                <div style="position: absolute; left: -5000px;">
+                                    <input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value="" type="text">
+                                </div>
+
+                                <div class="info"></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+               
+            </div>
+        </div>
+    </footer>
+    <script src="~/js/vendor/jquery-2.2.4.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="/js/vendor/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="/js/easing.min.js"></script>
+    <script src="/js/hoverIntent.js"></script>
+    <script src="/js/superfish.min.js"></script>
+    <script src="/js/jquery.ajaxchimp.min.js"></script>
+    <script src="/js/jquery.magnific-popup.min.js"></script>
+    <script src="/js/owl.carousel.min.js"></script>
+    <script src="/js/jquery.sticky.js"></script>
+    <script src="/js/jquery.nice-select.min.js"></script>
+    <script src="/js/waypoints.min.js"></script>
+    <script src="/js/jquery.counterup.min.js"></script>
+    <script src="/js/parallax.min.js"></script>
+    <script src="/js/mail-script.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="~/js/moment.js"></script>
+    <script src="~/js/combodate.js"></script>
+    @RenderSection("jsFooter", required: false)
+
+    <ejs-scripts></ejs-scripts>
+</body>
+</html>
+
+
+
+
+
